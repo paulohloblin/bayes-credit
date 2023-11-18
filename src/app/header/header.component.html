@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Bayes Credit</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="menu()">Поточні запити</button>
+    <span class="minimal-spacer"></span>
+    <button *ngIf="!this.networkService.isEdited" mat-raised-button disabled>Зберегти зміни</button>
+    <button *ngIf="this.networkService.isEdited"mat-raised-button (click)="save()">Зберегти зміни</button>
+  </mat-toolbar-row>
+</mat-toolbar>

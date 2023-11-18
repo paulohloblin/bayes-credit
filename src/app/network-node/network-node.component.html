@@ -1,0 +1,26 @@
+<h5 class="card-title">
+  {{ this.dictionaryService.translate(variable.key) }}
+</h5>
+<ul class="node-states-list">
+  <li *ngFor="let state of variable.value">
+    <div class="node-content">
+      <label>
+        {{ this.dictionaryService.translate(variable.key, state) }}
+      </label>
+
+      <div *ngIf="isQueried" class="proba-bar-outer">
+        <div class="proba-bar-inner"
+          [style.width]="(this.networkService.distribution[variable.key][state] * 100).toString() + '%'">
+        </div>
+      </div>
+
+      <div *ngIf="isQueried" class="proba">{{this.networkService.distribution[variable.key][state] * 100 | number:'1.2-2'}}% </div>
+
+      <input *ngIf="!isQueried" type="checkbox" (change)="onChecked(state)" [checked]="checkedStates[state]"/>
+    </div>
+  </li>
+</ul>
+<div class="node-tools-panel">
+  <button class="inference-button" (click)="onQueryClick()">{{query_button_text}}</button>
+  <ng-content></ng-content>
+</div>

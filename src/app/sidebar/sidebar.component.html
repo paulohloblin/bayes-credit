@@ -1,0 +1,25 @@
+<h3 class="sidebar-header">Поточні запити</h3>
+<hr>
+<div *ngFor="let variable of this.networkService.distribution | keyvalue" class="sidebar-node card">
+  <h5 class="card-title">
+    {{ this.dictionaryService.translate(variable.key) }}
+  </h5>
+  <ul class="node-states-list">
+    <li *ngFor="let state of variable.value | keyvalue">
+      <div class="node-content">
+        <label>
+          {{ this.dictionaryService.translate(variable.key, state.key) }}
+        </label>
+
+        <div class="proba-bar-outer">
+          <div class="proba-bar-inner"
+            [style.width]="(state.value * 100).toString() + '%'">
+          </div>
+        </div>
+
+        <div class="proba">{{state.value * 100 | number:'1.2-2'}}% </div>
+
+        </div>
+    </li>
+  </ul>
+</div>
