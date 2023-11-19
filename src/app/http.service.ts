@@ -35,7 +35,7 @@ export class HttpService {
     }
 
     getPositions(){
-      return this.http.get('assets/positions.json')
+      return this.http.get(this.url + 'getpositions')
     }
 
     getDictionary(){
