@@ -7,7 +7,7 @@ import {HttpParams} from '@angular/common/http';
 })
 export class HttpService {
 
-  url: string = 'http://127.0.0.1:5000/'
+  url: string = 'https://bayes-credit-backend.azurewebsites.net/'
 
   constructor(private http: HttpClient){ }
 
