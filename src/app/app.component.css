@@ -3,28 +3,31 @@
   height: 100%;
 }
 
-app-bayesian-network{
-  display: block;
-  width: 100%;
-  height: 100%;
+.example-spacer {
+  flex: 1 1 auto;
 }
 
-app-sidebar{
-  margin-top: 64px;
-  position: fixed;
-  background-color: white;
-  display: block;
-  z-index: 9;
+.minimal-spacer{
+  margin-right: 1%;
+}
+
+.mat-drawer-container {
+  height: calc(100% - var(--navbar-height));
+}
+
+.mat-header{
+  height: var(--navbar-height);
+}
+
+.mat-sidebar{
   width: 25%;
-  height: 100%;
-  right: 0;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
-  overflow: scroll;
 }
 
-app-header{
-  position: fixed;
-  z-index: 10;
-  display: block;
+app-bayesian-network{
+  display: grid;
+  grid-template-columns: repeat(4, 15rem);
+  grid-template-rows: repeat(3, 15rem);
   width: 100%;
+  height: 100%;
+  overflow: auto;
 }

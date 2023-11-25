@@ -12,7 +12,6 @@ import { AppComponent } from './app.component';
 import { BayesianNetworkComponent } from './bayesian-network/bayesian-network.component';
 import { NetworkNodeComponent } from './network-node/network-node.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppComponent,
     BayesianNetworkComponent,
     NetworkNodeComponent,
-    HeaderComponent,
     SidebarComponent
   ],
   imports: [

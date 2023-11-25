@@ -1,7 +1,16 @@
-<app-header></app-header>
-<div class="content-container" [style.width]="this.networkService.isMenu? '125%':'100%'">
+<mat-toolbar class="mat-header" color="primary">
+  <mat-toolbar-row>
+    <span>Bayes Credit App</span>
+    <span class="example-spacer"></span>
+    <button mat-raised-button (click)="drawer.toggle()">Поточні запити</button>
+    <span class="minimal-spacer"></span>
+    <button *ngIf="!this.networkService.isEdited" mat-raised-button disabled>Зберегти зміни</button>
+    <button *ngIf="this.networkService.isEdited"mat-raised-button (click)="save()">Зберегти зміни</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-drawer-container class="mat-drawer-container">
+  <mat-drawer #drawer mode="side" position="end" class="mat-sidebar">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
   <app-bayesian-network></app-bayesian-network>
-  <app-sidebar *ngIf="this.networkService.isMenu">
-  </app-sidebar>
-</div>
-```
+</mat-drawer-container>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, ElementRef, Renderer2 } from '@angular/core';
 import { HttpService } from '../http.service';
 import { NetworkService } from '../network.service';
 import 'leader-line';
@@ -34,30 +34,18 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.nodes.changes.subscribe((nodes) => {
-      this.nodesList = nodes.toArray();
+    // this.nodes.changes.subscribe((nodes) => {
+    //   this.nodesList = nodes.toArray();
 
-      this.httpService.getEdges().subscribe((data) => {
-        this.edgesFromServer = data as [string, string][];
-        for (const edge of this.edgesFromServer) {
-          this.addEdge(edge[0], edge[1]);
-        }
+    //   this.httpService.getEdges().subscribe((data) => {
+    //     this.edgesFromServer = data as [string, string][];
+    //     for (const edge of this.edgesFromServer) {
+    //       this.addEdge(edge[0], edge[1]);
+    //     }
+    //   });
 
-        // this.attachEdgesToElement('app-bayesian-network');
-      });
-    });
+    // });
   }
-
-  // attachEdgesToElement(elementName: string) {
-  //   //js code
-  //   const svgs = document.getElementsByClassName('leader-line');
-  //   console.log('svgs: ', svgs);
-  //   const element = document.getElementsByTagName(elementName)[0];
-  //   console.log('element to append: ', element);
-  //   for (let i = 0; i < svgs.length; i++) {
-  //     element.appendChild(svgs[i]);
-  //   }
-  // }
 
   returnNativeElementById(id: string) {
     return this.nodesList.find((node) => node.nativeElement.id === id)?.nativeElement;
@@ -107,11 +95,38 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
     }
   }
   onDragEnd(event: any) {
-    this.networkService.nodesPositions[event.source.element.nativeElement.id] = {
-      x: event.source.element.nativeElement.getBoundingClientRect().left + window.scrollX,
-      y: event.source.element.nativeElement.getBoundingClientRect().top + window.scrollY
-    };
+    const element = event.source.element.nativeElement;
+
+    const style = window.getComputedStyle(element);
+    const matrix = style.transform;
+
+    const matrixType = matrix.includes('3d') ? '3d' : '2d';
+
+    const matrixMatch = matrix.match(/matrix.*\((.+)\)/);
+
+    if (matrixMatch) {
+      const matrixValues = matrixMatch[1].split(', ');
+      let x = 0;
+      let y = 0;
+
+      if (matrixType === '2d') {
+        x = +matrixValues[4];
+        y = +matrixValues[5];
+      }
+
+      else if (matrixType === '3d') {
+        x = +matrixValues[12];
+        y = +matrixValues[13];
+      }
+
+      this.networkService.nodesPositions[element.id] = {
+        x: x,
+        y: y
+      };
+    }
 
     this.networkService.isEdited = true;
+
+    console.log(this.networkService.nodesPositions[element.id]);
   }
 }

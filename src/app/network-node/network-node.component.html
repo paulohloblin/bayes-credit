@@ -3,20 +3,25 @@
 </h5>
 <ul class="node-states-list">
   <li *ngFor="let state of variable.value">
-    <div class="node-content">
-      <label>
+    <div *ngIf="isQueried" class="node-content">
+      <label style="width: 30%;">
         {{ this.dictionaryService.translate(variable.key, state) }}
       </label>
 
-      <div *ngIf="isQueried" class="proba-bar-outer">
+      <div class="proba-bar-outer">
         <div class="proba-bar-inner"
           [style.width]="(this.networkService.distribution[variable.key][state] * 100).toString() + '%'">
         </div>
       </div>
 
-      <div *ngIf="isQueried" class="proba">{{this.networkService.distribution[variable.key][state] * 100 | number:'1.2-2'}}% </div>
+      <div class="proba">{{this.networkService.distribution[variable.key][state] * 100 | number:'1.2-2'}}% </div>
+    </div>
 
-      <input *ngIf="!isQueried" type="checkbox" (change)="onChecked(state)" [checked]="checkedStates[state]"/>
+    <div *ngIf="!isQueried" class="node-content">
+      <label>
+        {{ this.dictionaryService.translate(variable.key, state) }}
+      </label>
+      <input type="checkbox" (change)="onChecked(state)" [checked]="checkedStates[state]"/>
     </div>
   </li>
 </ul>

@@ -5,11 +5,10 @@
 [variable]="variable"
 class="card resizable"
 cdkDrag
+cdkDragBoundary="app-bayesian-network"
 (cdkDragMoved)="onDrag($event)"
 (cdkDragEnded)="onDragEnd($event)"
-[style.position]="getCoordinatesOfNode(variable.key) !== undefined ? 'absolute' : 'static'"
-[style.left.px]="getCoordinatesOfNode(variable.key) !== undefined ? getCoordinatesOfNode(variable.key).x : 'auto'"
-[style.top.px]="getCoordinatesOfNode(variable.key) !== undefined ? getCoordinatesOfNode(variable.key).y : 'auto'">
+[cdkDragFreeDragPosition]="getCoordinatesOfNode(variable.key)">
   <!--just an icon for dragging a node-->
   <div class="drag-handle" cdkDragHandle>
     <svg width="24px" fill="currentColor" viewBox="0 0 24 24">

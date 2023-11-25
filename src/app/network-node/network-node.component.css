@@ -1,6 +1,6 @@
-ul {
-  list-style-type: none;
-  padding-left: 10px;
+h5{
+  margin-left: 10px;
+  font-size: 14px;
 }
 
 input[type=checkbox] {
@@ -8,22 +8,34 @@ input[type=checkbox] {
   margin-right: 10px;
 }
 
+label{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+.inference-button{
+  margin-right: 20px;
+  margin-bottom: 20px;
+  width: 50px;
+}
+
 .node-content{
   display: flex;
   justify-content: space-between;
 }
 
-label{
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 30%;
+.node-tools-panel{
+  display: flex;
+  justify-content: flex-end;
 }
-
-/* .proba-bar-outer{
-  width: 50%;
-  padding-right: 1%;
-} */
 
 .proba-bar-inner{
   display: inline-block;
@@ -34,15 +46,5 @@ label{
 
 .proba{
   width: 20%;
-}
-
-.node-tools-panel{
-  display: flex;
-  justify-content: flex-end;
-}
-
-.inference-button{
-  margin-right: 20px;
-  margin-bottom: 40px;
-  width: 50px;
+  font-size: 12px;
 }
