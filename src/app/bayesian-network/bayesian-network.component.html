@@ -1,18 +1,42 @@
-<app-network-node
-*ngFor="let variable of variables"
-#node
-[id]="variable.key"
-[variable]="variable"
-class="card resizable"
-cdkDrag
-cdkDragBoundary="app-bayesian-network"
-(cdkDragEnded)="onDragEnd($event)"
-[cdkDragFreeDragPosition]="getCoordinatesOfNode(variable.key)">
-  <!--just an icon for dragging a node-->
-  <div class="drag-handle" cdkDragHandle>
-    <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-      <path d="M0 0h24v24H0z" fill="none"></path>
-    </svg>
-  </div>
-</app-network-node>
+<ngx-graph
+  class="chart-container"
+  [links]="ngxGraphEdges"
+  [nodes]="ngxGraphNodes"
+>
+<ng-template #defsTemplate>
+  <svg:marker
+    id="arrow"
+    viewBox="0 -5 10 10"
+    refX="8"
+    refY="0"
+    markerWidth="4"
+    markerHeight="4"
+    orient="auto"
+  >
+    <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+  </svg:marker>
+</ng-template>
+
+<ng-template #nodeTemplate let-node>
+  <svg:g class="node"ngx-tooltip>
+    <foreignObject #nodeSvg width="15rem" height="15rem">
+      <app-network-node
+        #node
+        [id]="node.variables.key"
+        [variable]="node.variables"
+        class="card">
+      </app-network-node>
+    </foreignObject>
+  </svg:g>
+</ng-template>
+
+<ng-template #linkTemplate let-link>
+  <svg:g class="edge">
+    <svg:path
+      class="line"
+      stroke-width="2"
+      marker-end="url(#arrow)"
+    ></svg:path>
+  </svg:g>
+</ng-template>
+</ngx-graph>

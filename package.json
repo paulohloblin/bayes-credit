@@ -21,20 +21,29 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@swimlane/ngx-graph": "^8.2.3",
-    "leader-line": "^1.0.7",
+    "d3-array": "^2.2.0",
+    "d3-brush": "^1.0.6",
+    "d3-color": "^1.2.8",
+    "d3-force": "^2.0.1",
+    "d3-format": "^1.3.2",
+    "d3-hierarchy": "^1.1.8",
+    "d3-interpolate": "^1.3.2",
+    "d3-scale": "^3.0.0",
+    "d3-shape": "^1.3.5",
+    "d3-time-format": "^2.1.3",
     "rxjs": "~7.8.0",
-    "svg-dom-arrows": "github:tarkant/svg-dom-arrows",
     "tslib": "^2.3.0",
-    "uninstall": "^0.0.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.1",
     "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.2.0",
+    "@types/d3": "^7.4.3",
+    "@types/d3-axis": "^3.0.6",
     "@types/jasmine": "~4.3.0",
-    "@types/react": "^18.2.38",
-    "arrows-svg": "^1.7.1",
+    "d3": "^7.8.5",
+    "d3-axis": "^3.0.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -42,5 +51,9 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.1.3"
-  }
+  },
+
+  "overrides": {
+    "d3-selection": "3.0.0"
+}
 }
