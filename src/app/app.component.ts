@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, ElementRef} from '@angular/core';
 import { NetworkService } from './network.service';
 import { HttpService } from './http.service';
 @Component({
@@ -11,7 +11,8 @@ export class AppComponent {
   title = 'bayes-credit';
   isMenu: boolean = false;
   constructor(public networkService: NetworkService,
-    private httpService: HttpService) {
+    private httpService: HttpService,
+    private elRef: ElementRef) {
   }
 
   save(){

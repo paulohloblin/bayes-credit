@@ -18,3 +18,22 @@ body {
   padding-right: 5%;
   padding-left: 5%;
 }
+
+.arrow {
+  pointer-events: none;
+}
+
+.arrow__path {
+  stroke: gray;
+  fill: transparent;
+  stroke-width: 3px;
+}
+
+.arrow__head line {
+  stroke: gray;
+  stroke-width: 2px;
+}
+
+svg:hover {
+  fill: red;
+}

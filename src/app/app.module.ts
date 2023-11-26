@@ -19,7 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AppComponent,
     BayesianNetworkComponent,
     NetworkNodeComponent,
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

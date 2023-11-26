@@ -12,7 +12,6 @@ export class NetworkService {
   nodesPositions: Record<string, { x: number, y: number }> = {}
   nodesInitPositions: Record<string, { x: number, y: number }> = {}
   edges: { from: string, to: string, line:any }[] = [];
-  isMenu: boolean = false;
 
   constructor(private httpService: HttpService) {
     this.httpService.getPositions().subscribe((data) => {

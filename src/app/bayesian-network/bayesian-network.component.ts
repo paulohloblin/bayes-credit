@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { HttpService } from '../http.service';
 import { NetworkService } from '../network.service';
-import 'leader-line';
-declare var LeaderLine: any;
+import { arrowCreate, HEAD } from 'arrows-svg';
 
 @Component({
   selector: 'app-bayesian-network',
@@ -14,6 +13,8 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   nodesList: ElementRef[] = [];
 
   edgesFromServer: [string, string][] = [];
+
+  areEdgesSetUp: boolean = false;
 
   apiResponse = {};
 
@@ -34,46 +35,37 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // this.nodes.changes.subscribe((nodes) => {
-    //   this.nodesList = nodes.toArray();
+    this.nodes.changes.subscribe((nodes) => {
+      this.nodesList = nodes.toArray();
 
-    //   this.httpService.getEdges().subscribe((data) => {
-    //     this.edgesFromServer = data as [string, string][];
-    //     for (const edge of this.edgesFromServer) {
-    //       this.addEdge(edge[0], edge[1]);
-    //     }
-    //   });
+      this.httpService.getEdges().subscribe((data) => {
+        this.edgesFromServer = data as [string, string][];
 
-    // });
+        let elmWrapper = document.querySelectorAll("mat-drawer-container")[0];
+
+        for (const edge of this.edgesFromServer) {
+          this.addEdge(edge[0], edge[1], elmWrapper);
+        }
+        this.areEdgesSetUp = true;
+      });
+    });
   }
 
   returnNativeElementById(id: string) {
     return this.nodesList.find((node) => node.nativeElement.id === id)?.nativeElement;
   }
 
-  addEdge(from: string, to: string) {
-    const line = new LeaderLine(this.returnNativeElementById(from), this.returnNativeElementById(to));
-    line.color = 'gray';
-    this.networkService.edges.push({ from, to, line });
-  }
-
-  removeEdge(edge: { from: string, to: string, line:any }) {
-    if (edge) {
-      edge.line.remove();
-      this.networkService.edges = this.networkService.edges.filter((e) => e !== edge);
-    }
-  }
-
-  findAllEdgesOfNode(node: string) {
-    return this.networkService.edges.filter((edge) => edge.from === node || edge.to === node);
-  }
-
-  eraseAllEdgesOfNode(node: string) {
-    for (const edge of this.networkService.edges) {
-      if (edge.from === node || edge.to === node) {
-        this.removeEdge(edge);
+  addEdge(from: string, to: string, elmWrapper:Element) {
+    const arrow = arrowCreate({
+      from: {node: this.returnNativeElementById(from)},
+      to: {node: this.returnNativeElementById(to)},
+      head: {
+        func: HEAD['VEE'],
+        size: 10,
       }
-    }
+    })
+
+    elmWrapper.appendChild(arrow.node);
   }
 
   getCoordinatesOfNode(node: string) {
@@ -83,17 +75,6 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
     return this.networkService.nodesInitPositions[node]
   }
 
-  onDrag(event: any) {
-    const currentNode = event.source.element.nativeElement.id;
-
-    const edgesOfNode = this.findAllEdgesOfNode(currentNode);
-
-    this.eraseAllEdgesOfNode(currentNode);
-
-    for (const edge of edgesOfNode) {
-      this.addEdge(edge.from, edge.to);
-    }
-  }
   onDragEnd(event: any) {
     const element = event.source.element.nativeElement;
 
@@ -126,7 +107,5 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
     }
 
     this.networkService.isEdited = true;
-
-    console.log(this.networkService.nodesPositions[element.id]);
   }
 }

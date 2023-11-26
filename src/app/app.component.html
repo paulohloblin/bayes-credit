@@ -8,9 +8,9 @@
     <button *ngIf="this.networkService.isEdited"mat-raised-button (click)="save()">Зберегти зміни</button>
   </mat-toolbar-row>
 </mat-toolbar>
-<mat-drawer-container class="mat-drawer-container">
+<mat-drawer-container #drawerContainer class="mat-drawer-container">
   <mat-drawer #drawer mode="side" position="end" class="mat-sidebar">
     <app-sidebar></app-sidebar>
   </mat-drawer>
-  <app-bayesian-network></app-bayesian-network>
+  <app-bayesian-network #bn></app-bayesian-network>
 </mat-drawer-container>

@@ -17,6 +17,9 @@
 
 .mat-header{
   height: var(--navbar-height);
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .mat-sidebar{

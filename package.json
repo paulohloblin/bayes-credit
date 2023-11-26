@@ -20,9 +20,12 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@swimlane/ngx-graph": "^8.2.3",
     "leader-line": "^1.0.7",
     "rxjs": "~7.8.0",
+    "svg-dom-arrows": "github:tarkant/svg-dom-arrows",
     "tslib": "^2.3.0",
+    "uninstall": "^0.0.0",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {
@@ -30,6 +33,8 @@
     "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.2.0",
     "@types/jasmine": "~4.3.0",
+    "@types/react": "^18.2.38",
+    "arrows-svg": "^1.7.1",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
