@@ -4,8 +4,6 @@
     <span class="example-spacer"></span>
     <button mat-raised-button (click)="drawer.toggle()">Поточні запити</button>
     <span class="minimal-spacer"></span>
-    <button *ngIf="!this.networkService.isEdited" mat-raised-button disabled>Зберегти зміни</button>
-    <button *ngIf="this.networkService.isEdited"mat-raised-button (click)="save()">Зберегти зміни</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-drawer-container #drawerContainer class="mat-drawer-container">

@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChildren, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { HttpService } from '../http.service';
-import { NetworkService } from '../network.service';
 import { DagreLayout, DagreSettings, Layout, Orientation } from '@swimlane/ngx-graph';
 
 @Component({
@@ -10,7 +9,6 @@ import { DagreLayout, DagreSettings, Layout, Orientation } from '@swimlane/ngx-g
 })
 export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   variables: { key: string, value: string[] }[] = [];
-  nodesList: ElementRef[] = [];
 
   ngxGraphNodes: { id: string, label: string }[] = [];
   ngxGraphEdges: { id:string, source: string, target: string }[] = [];
@@ -29,8 +27,7 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
 
   @ViewChildren('nodeSvg', { read: ElementRef }) nodeSvgs!: QueryList<ElementRef>;
 
-  constructor(private httpService: HttpService,
-    private networkService: NetworkService){
+  constructor(private httpService: HttpService){
     }
 
   ngOnInit() {

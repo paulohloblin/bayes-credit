@@ -34,15 +34,7 @@ export class HttpService {
       return this.http.get(this.url + 'edges')
     }
 
-    getPositions(){
-      return this.http.get(this.url + 'getpositions')
-    }
-
     getDictionary(){
       return this.http.get('assets/dict.json')
-    }
-
-    saveNetwork(network: Record<string, { x: number, y: number }>){
-      return this.http.post(this.url + 'savepositions', network)
     }
 }
