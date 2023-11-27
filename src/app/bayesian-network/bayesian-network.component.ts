@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, ViewChild, AfterViewInit, QueryList, ElementRef } from '@angular/core';
 import { HttpService } from '../http.service';
 import { NetworkService } from '../network.service';
+import { DagreLayout, DagreSettings, Layout, Orientation } from '@swimlane/ngx-graph';
 
 @Component({
   selector: 'app-bayesian-network',
@@ -15,6 +16,12 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   ngxGraphEdges: { id:string, source: string, target: string }[] = [];
 
   edgesFromServer: [string, string][] = [];
+
+  //create a dagre layout with orientation set to TB
+  layoutSettings: DagreSettings = {
+    orientation: Orientation.TOP_TO_BOTTOM,
+  };
+  layout: Layout = new DagreLayout();
 
   areEdgesSetUp: boolean = false;
 
@@ -51,11 +58,15 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
     this.nodeSvgs.changes.subscribe((nodesSvgs) => {
 
       for (const nodeSvg of nodesSvgs.toArray()) {
-        const childHeight = nodeSvg.nativeElement.children[0].getBoundingClientRect().height;
-        const childWidth = nodeSvg.nativeElement.children[0].getBoundingClientRect().width;
-        nodeSvg.nativeElement.setAttribute('height', childHeight);
-        nodeSvg.nativeElement.setAttribute('width', childWidth);
+        this.AdjustSvgContainer(nodeSvg);
       }
     });
+  }
+
+  private AdjustSvgContainer(nodeSvg: any) {
+    const childHeight = nodeSvg.nativeElement.children[0].getBoundingClientRect().height;
+    const childWidth = nodeSvg.nativeElement.children[0].getBoundingClientRect().width;
+    nodeSvg.nativeElement.setAttribute('height', childHeight);
+    nodeSvg.nativeElement.setAttribute('width', childWidth);
   }
 }

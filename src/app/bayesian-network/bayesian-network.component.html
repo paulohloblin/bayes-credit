@@ -2,6 +2,8 @@
   class="chart-container"
   [links]="ngxGraphEdges"
   [nodes]="ngxGraphNodes"
+  [layout]="layout"
+  [layoutSettings]="layoutSettings"
 >
 <ng-template #defsTemplate>
   <svg:marker
@@ -34,7 +36,7 @@
   <svg:g class="edge">
     <svg:path
       class="line"
-      stroke-width="2"
+      stroke-width="4"
       marker-end="url(#arrow)"
     ></svg:path>
   </svg:g>
