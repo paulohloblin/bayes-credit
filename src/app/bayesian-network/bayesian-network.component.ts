@@ -18,6 +18,8 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   //create a dagre layout with orientation set to TB
   layoutSettings: DagreSettings = {
     orientation: Orientation.TOP_TO_BOTTOM,
+    ranker: 'network-simplex',
+    rankPadding: 40,
   };
   layout: Layout = new DagreLayout();
 
