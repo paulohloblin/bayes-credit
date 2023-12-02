@@ -8,8 +8,3 @@ app-network-node{
 app-network-node:hover{
   background-color: white;
 }
-
-app-network-node.resizable{
-  resize: both;
-  overflow: auto;
-}

@@ -10,7 +10,7 @@ export class NetworkService {
   edges: { from: string, to: string, line:any }[] = [];
 
   constructor() {
-   }
+  }
 
   addEvidence(variable: string, state: string) {
     this.evidence[variable] = state;

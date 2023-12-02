@@ -13,17 +13,13 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
   ngxGraphNodes: { id: string, label: string }[] = [];
   ngxGraphEdges: { id:string, source: string, target: string }[] = [];
 
-  edgesFromServer: [string, string][] = [];
-
-  //create a dagre layout with orientation set to TB
   layoutSettings: DagreSettings = {
     orientation: Orientation.TOP_TO_BOTTOM,
     ranker: 'network-simplex',
     rankPadding: 40,
   };
-  layout: Layout = new DagreLayout();
 
-  areEdgesSetUp: boolean = false;
+  layout: Layout = new DagreLayout();
 
   apiResponse = {};
 
@@ -45,8 +41,8 @@ export class BayesianNetworkComponent implements OnInit, AfterViewInit {
       });
 
       this.httpService.getEdges().subscribe((data) => {
-        this.edgesFromServer = data as [string, string][];
-        this.ngxGraphEdges = this.edgesFromServer.map((edge) => {
+        const edgesFromServer = data as [string, string][];
+        this.ngxGraphEdges = edgesFromServer.map((edge) => {
           return { id: `${edge[0]}-${edge[1]}`, source: edge[0], target: edge[1] };
         });
       });
