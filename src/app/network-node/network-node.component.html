@@ -9,8 +9,7 @@
       </label>
 
       <div class="proba-bar-outer">
-        <div class="proba-bar-inner"
-          [style.width]="(this.networkService.distribution[variable.key][state] * 100).toString() + '%'">
+        <div class="proba-bar-inner"[style.width]="(this.networkService.distribution[variable.key][state] * 100).toString() + '%'">
         </div>
       </div>
 
