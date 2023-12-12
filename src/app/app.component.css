@@ -1,7 +1,4 @@
-.content-container{
-  display: flex;
-  height: 100%;
-}
+
 
 .example-spacer {
   flex: 1 1 auto;
@@ -25,6 +22,7 @@
 }
 
 app-bayesian-network{
+  overflow: hidden;
   display: block;
   width: 100%;
   height: 100%;
